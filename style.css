@@ -106,10 +106,39 @@ ul {
     list-style: none; padding: 0;
 }
 li {
-    font-weight: 500; margin: 18px 0; background: #e0f2f1;
-    border-radius: 10px; padding: 12px 18px 10px 32px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03); position: relative;
+    font-weight: 500; 
+    margin: 18px 0; 
+    background: #e0f2f1;
+    border-radius: 10px; 
+    padding: 12px 90px 12px 50px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03); 
+    position: relative;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background .2s, box-shadow .2s;
 }
+
+li:hover { 
+    background:#d5ecea; 
+}
+
+/* Dark mode */
+body.dark-mode .route-planning-mode li.is-selected {
+    background: #21524c;
+    box-shadow: 0 0 0 3px var(--accent);
+}
+body.dark-mode .route-planning-mode li.is-selected:hover {
+    background: #21524c;
+    box-shadow: 0 0 0 3px var(--accent);
+}
+
+/* Se já usa li.is-favorited com box-shadow, manter a borda por cima */
+.route-planning-mode li.is-favorited.is-selected::after {
+    border-color: var(--accent);
+}
+
 /* Container para os botões de link dentro de um <li> */
 .link-actions {
     margin-top: 8px;
@@ -211,20 +240,6 @@ a:hover {
 }
 
 /* --- ESTRUTURA E ALINHAMENTO DOS ITENS DA LISTA --- */
-
-/* 1. O contêiner principal do item (li) */
-li {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    position: relative;
-    padding: 12px 90px 12px 50px;
-    font-weight: 500;
-    margin: 18px 0;
-    background: #e0f2f1;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-}
 
 /* 2. O nome do lugar */
 li > strong {
@@ -368,6 +383,28 @@ footer {
     padding: 20px;
     margin-top: 40px; /* Cria um espaço entre o conteúdo principal e o rodapé */
 }
+footer a {
+    color: #b2dfdb; /* Verde claro para links no rodapé */
+    text-decoration: none;
+    font-weight: 500;
+}
+footer a:hover {
+    text-decoration: underline;
+    color: var(--accent);
+}
+
+/* Acessibilidade: foco visível consistente */
+:where(a, button, .visited-btn, .favorite-btn, .dismiss-btn, .map-icon-toggle, .route-fab, input, select, textarea)
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* Opcional: remover o contorno padrão no clique do mouse sem afetar teclado */
+:focus:not(:focus-visible) {
+    outline: none;
+}
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 700px) {
     section { padding: 18px 6vw; margin: 24px 2vw 0 2vw; }
@@ -410,11 +447,6 @@ footer {
     pointer-events: none; /* Desativa cliques nos botões antigos */
 }
 
-/* 4. Estilo para o item QUANDO ele for selecionado (será ativado via JS no próximo passo) */
-.route-planning-mode li.is-selected {
-    background-color: #dbeff0; /* Um tom de fundo um pouco diferente */
-    box-shadow: 0 0 0 3px var(--accent); /* Borda de destaque forte */
-}
 /* --- Botão Flutuante (FAB) de Gerar Rota --- */
 .route-fab {
     display: none; /* Começa escondido */
@@ -439,4 +471,161 @@ footer {
 /* Mostra o botão APENAS quando o modo de planejamento está ativo */
 .route-planning-mode .route-fab {
     display: block;
+}
+
+/* === Dark Mode ===================================================== */
+#theme-toggle {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: var(--primary-dark);
+    color: var(--white);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: background .2s;
+}
+#theme-toggle:hover { background: var(--accent); color: var(--primary-dark); }
+
+body.dark-mode {
+    --background:#0f1f1d;
+    --white:#142826;
+    --primary:#00bfae;
+    --primary-dark:#008d7d;
+    --accent:#26ffd8;
+    color:#d9f6f2;
+}
+body.dark-mode header {
+    background: linear-gradient(90deg,#004d45,#00bfae);
+}
+body.dark-mode section,
+body.dark-mode .hero,
+body.dark-mode .map-modal-content {
+    background: var(--white);
+}
+body.dark-mode li {
+    background:#1d3a37;
+    color:#d9f6f2;
+}
+body.dark-mode li:hover {
+    background:#224743;
+}
+
+body.dark-mode nav a {
+    background:#0f3b36;
+    color:#d9f6f2;
+}
+body.dark-mode nav a:hover,
+body.dark-mode nav a.active {
+    background:var(--accent);
+    color:#0d2d28;
+}
+body.dark-mode .action-link {
+    background:#0f3b36;
+    color:#d9f6f2;
+}
+body.dark-mode .action-link:hover {
+    background:var(--accent);
+    color:#0d2d28;
+}
+body.dark-mode #back-to-top,
+body.dark-mode .map-icon-toggle,
+body.dark-mode .route-fab {
+    box-shadow:0 4px 15px rgba(0,0,0,0.6);
+}
+body.dark-mode footer {
+    background:#082422;
+    color:#b9e9e3;
+}
+body.dark-mode a { color: var(--accent); }
+body.dark-mode a:hover { color:#7affeb; }
+
+/* Legibilidade: no modo claro, texto escuro quando o item selecionado tem fundo claro */
+body:not(.dark-mode) .route-planning-mode li.is-selected,
+body:not(.dark-mode) .route-planning-mode li.is-selected:hover {
+    color: #0d2d28;
+}
+
+body:not(.dark-mode) .route-planning-mode li.is-selected > strong,
+body:not(.dark-mode) .route-planning-mode li.is-selected .desc,
+body:not(.dark-mode) .route-planning-mode li.is-selected a {
+    color: #0d2d28 !important;
+}
+
+/* Hover dos links dentro do item selecionado (modo claro) */
+body:not(.dark-mode) .route-planning-mode li.is-selected a:hover {
+    color: #08302b !important;
+}
+
+/* Seleção consistente e legível no Planejar Rota */
+body.route-planning-mode:not(.dark-mode) li.is-selected,
+body.route-planning-mode:not(.dark-mode) li.is-selected:hover,
+body.route-planning-mode:not(.dark-mode) li.is-selected:focus {
+    background: #d5f6f2 !important;
+    box-shadow: 0 0 0 3px var(--accent) !important;
+    color: #0d2d28 !important; /* texto escuro no fundo claro */
+}
+body.route-planning-mode:not(.dark-mode) li.is-selected > strong,
+body.route-planning-mode:not(.dark-mode) li.is-selected .desc,
+body.route-planning-mode:not(.dark-mode) li.is-selected a {
+    color: #0d2d28 !important;
+}
+body.route-planning-mode:not(.dark-mode) li.is-selected .action-link {
+    color: var(--white) !important;
+    background: var(--primary) !important;
+}
+body.route-planning-mode:not(.dark-mode) li.is-selected .action-link:hover {
+    color: var(--primary-dark) !important;
+    background: var(--accent) !important;
+}
+
+/* Se quiser manter os demais links escuros dentro do item selecionado (exceto .action-link) */
+body.route-planning-mode:not(.dark-mode) li.is-selected a:not(.action-link),
+body.route-planning-mode:not(.dark-mode) li.is-selected a:not(.action-link):hover {
+    color: #0d2d28 !important;
+}
+
+body.dark-mode.route-planning-mode li.is-selected,
+body.dark-mode.route-planning-mode li.is-selected:hover,
+body.dark-mode.route-planning-mode li.is-selected:focus {
+    background: #21524c !important;
+    box-shadow: 0 0 0 3px var(--accent) !important;
+    color: #d9f6f2 !important; /* texto claro no fundo escuro */
+}
+body.dark-mode.route-planning-mode li.is-selected > strong,
+body.dark-mode.route-planning-mode li.is-selected .desc,
+body.dark-mode.route-planning-mode li.is-selected a {
+    color: #d9f6f2 !important;
+}
+/* Links dentro do item selecionado em dark mode ficam em destaque ao hover */
+body.dark-mode.route-planning-mode li.is-selected a:hover {
+    color: var(--accent) !important;
+}
+
+/* Mantém a borda/realce mesmo em hover (sem “piscar” o fundo) */
+body.route-planning-mode li.is-selected:hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--accent);
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+/* Correção: não escurecer os botões .action-link dentro do item selecionado (modo claro) */
+body:not(.dark-mode) .route-planning-mode li.is-selected a:not(.action-link),
+body:not(.dark-mode) .route-planning-mode li.is-selected a:not(.action-link):hover {
+    color: #0d2d28 !important;
+}
+
+body:not(.dark-mode) .route-planning-mode li.is-selected .action-link {
+    color: var(--white) !important;
+    background: var(--primary) !important;
+}
+body:not(.dark-mode) .route-planning-mode li.is-selected .action-link:hover {
+    color: var(--primary-dark) !important;
+    background: var(--accent) !important;
 }
