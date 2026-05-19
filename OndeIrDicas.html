@@ -13,17 +13,21 @@
         <nav>
             <a href="index.html">Home</a>
             <a href="OndeVisitar.html">Pontos Turísticos</a>
-            <a href="OndeComer.html" class="active" aria-current="page">Restaurantes</a>
-            <a href="OndeIrDicas.html">Dicas</a>
-            <!--
             <a href="OndeComer.html">Restaurantes</a>
+            <a href="OndeIrDicas.html" class="active" aria-current="page">Dicas</a>
+            <!--
+            <a href="OndeIrDicas.html">Dicas</a>
             -->
         </nav>
         <button id="theme-toggle" type="button" aria-label="Alternar tema" aria-pressed="false">🌙</button>
     </header>
 
     <main>
+        
         <section>
+            <h1>Dicas rápidas — Onde ir</h1>
+            <p>Selecione por cidade: praias, mirantes, centros de compras, feiras e locais culturais recomendados.</p>
+            
             <div class="main-actions-container">
                 <button id="toggle-favorites-btn">⭐ Meus Favoritos</button>
                 <button id="toggle-route-mode-btn">🗺️ Planejar Rota</button>
@@ -34,227 +38,103 @@
                 <ul id="favorites-list"></ul>  
             </section>
             
-            <h3>Serra</h3>
-            <ul>
-                <li data-id="mahai-serra" data-location-name="Mahai - Serra">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Mahai - Serra</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/9u9PDhmT35qaN3JGA" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="restaurante-lagoa-juara" data-location-name="Restaurante lagoa juara">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Restaurante lagoa juara</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/dzH2kt6JW8x4BHqh7" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="petisco-das-meninas-manguinhos" data-location-name="Petisco das meninas Manguinhos">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Petisco das meninas Manguinhos</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/KuDTHnALbYsLbYgg8" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="petisco-das-meninas-colina" data-location-name="Petisco das meninas colina">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Petisco das meninas colina</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/Ev2L6FtybhaLygFJ8" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="lansavi" data-location-name="Lansavi">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Lansavi</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/76QRZrrf56MAmtEj8" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="silvas" data-location-name="Silvas">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Silvas</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/ZLYqrmrVu4rTkySX8" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="praio-gastrobar" data-location-name="Praiô Gastrobar">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Praiô Gastrobar</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/hgjKt5ApZU3nyZhv7" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-            </ul>
-
             <h3>Vitória</h3>
             <ul>
-                <li data-id="tero-brasa-e-vinho" data-location-name="Tero Brasa e Vinho">
+                <li>
                     <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Tero Brasa e Vinho</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/pFCrJLEk3MzxQfrY6" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
+                    <strong>Praia de Camburi</strong>
+                    <span class="desc">Extensa orla para caminhada, quiosques e áreas para exercícios; ótimo para pôr do sol.</span>
                 </li>
-
-                <li data-id="la-dolina-restaurante-argentino-vitória" data-location-name="La Dolina - Restaurante Argentino Vitória">
+                <li>
                     <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>La Dolina - Restaurante Argentino Vitória</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/vjGRoHPjh47nDLJJ6" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
+                    <strong>Ilha das Caieiras</strong>
+                    <span class="desc">Vila de pescadores com restaurantes de frutos do mar e artesanato local.</span>
                 </li>
-
-                <li data-id="o-quintal-parrilla-bar" data-location-name="O Quintal Parrilla Bar">
+                <li>
                     <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>O Quintal Parrilla Bar</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/M7S2KbJmAL3hmZDu8" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
+                    <strong>Praça do Papa</strong>
+                    <span class="desc">Mirante com vista para a Baía de Vitória e espaços para eventos ao ar livre.</span>
                 </li>
-
-                <li data-id="alas" data-location-name="Alas">
+                <li>
                     <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Alas</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/ofYtCwFiEyCA5aPV9" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
+                    <strong>Centro Histórico</strong>
+                    <span class="desc">Passeie pelas ruas antigas, lojas de artesanato e pequenos cafés.</span>
                 </li>
-
-                <li data-id="restaurante-el-gitano" data-location-name="Restaurante El Gitano">
+                <li>
                     <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Restaurante El Gitano</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/9rETdTdtrNFQsE7HA" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="bistro-saldanha" data-location-name="Bistrô Saldanha">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Bistrô Saldanha</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/h9KtD9sXbGDZZwSeA" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="meatpack" data-location-name="Meatpack">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Meatpack</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/advBwBxP9KjDiN6EA" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="restaurante-caieiras" data-location-name="Restaurante Caieiras">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Restaurante Caieiras</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/YEZ66uJsGoF6mLDe7" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="poke-beach-vitoria" data-location-name="Poke Beach - Vitória">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Poke Beach - Vitória</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/uC8y2P5RDLAihBMB6" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="restaurante-banzai" data-location-name="Restaurante Banzai">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Restaurante Banzai</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/PVyVTEyEteAytFKS8" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
-                </li>
-
-                <li data-id="comarella-pizza-burger-vitoria" data-location-name="Comarella Pizza & Burger Vitória">
-                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
-                    <strong>Comarella Pizza & Burger Vitória</strong>
-                    <div class="item-actions">
-                        <button type="button" class="favorite-btn" aria-label="Favoritar">❤️</button>
-                        <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
-                    </div>
-                    <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/dGgnDoNMAqm518S38" target="_blank" rel="noopener noreferrer" class="location-link action-link">Localização</a>
-                    </div>
+                    <strong>Mercado Municipal</strong>
+                    <span class="desc">Bom para provar produtos locais, lanches e comprar lembranças.</span>
                 </li>
             </ul>
+
+            <h3>Vila Velha</h3>
+            <ul>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Convento da Penha</strong>
+                    <span class="desc">Principal ponto turístico do Estado — vista panorâmica e história.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Praia da Costa</strong>
+                    <span class="desc">Praia urbana com grande infraestrutura, calçadão e muitos bares e restaurantes.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Morro do Moreno</strong>
+                    <span class="desc">Trilhas e mirantes — ótima opção para quem curte natureza e fotografia.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Farol de Santa Luzia</strong>
+                    <span class="desc">Visita curta com boa vista para a orla; verifique horários de acesso.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Shopping/Comércio local</strong>
+                    <span class="desc">Bons centros comerciais e ruas com lojas para compras e alimentação.</span>
+                </li>
+            </ul>
+
+            <h3>Serra</h3>
+            <ul>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Jacaraípe</strong>
+                    <span class="desc">Praia de surf e quiosques animados — opção para esportes aquáticos.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Manguinhos</strong>
+                    <span class="desc">Pontos gastronômicos e bares à beira-mar; excelente para almoço ao ar livre.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Nova Almeida (centro histórico)</strong>
+                    <span class="desc">Casario antigo e feiras locais — bom para quem curte história e fotografia.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Lagoas e áreas verdes</strong>
+                    <span class="desc">Locais tranquilos para passeios em família e piqueniques.</span>
+                </li>
+                <li>
+                    <button type="button" class="visited-btn" aria-label="Marcar como visitado">✅</button>
+                    <strong>Feiras e comércio local</strong>
+                    <span class="desc">Procure feiras de artesanato e produtores locais para lembranças e comidas típicas.</span>
+                </li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Dicas rápidas de visita</h2>
+            <ul>
+                <li>Leve protetor solar e água para passeios na orla.</li>
+                <li>Verifique horários de funcionamento antes de visitar atrações históricas.</li>
+                <li>Prefira estacionamentos oficiais e cuide de pertences em locais turísticos movimentados.</li>
+                <li>Experimente a culinária local: pratos com frutos do mar e quitutes capixabas.</li>
+            </ul>
+        </section>
                 <!---
                 <li data-id="pedra-da-cebola" 
                     data-location-name="Parque Pedra da Cebola"
