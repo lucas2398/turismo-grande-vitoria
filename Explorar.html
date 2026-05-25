@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/684/684908.png">
+    <title>Explorar — Turismo na Grande Vitória</title>
+    <style>
+        /* === Estilos exclusivos da página Explorar === */
+
+        .explorar-hero {
+            max-width: 900px;
+            margin: 32px auto 0;
+            padding: 28px 24px 20px;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .explorar-hero h1 {
+            margin: 0 0 6px;
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+        }
+        .explorar-hero p {
+            margin: 0 0 20px;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Filtros de cidade */
+        .city-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        .city-btn {
+            background: var(--primary-dark);
+            color: var(--white);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .city-btn:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+        .city-btn.active {
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-weight: bold;
+            transform: translateY(-1px);
+        }
+
+        /* Layout de duas colunas */
+        .explorar-grid {
+            max-width: 900px;
+            margin: 24px auto 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 700px) {
+            .explorar-grid { grid-template-columns: 1fr; margin: 16px 3vw 32px; }
+        }
+
+        .explorar-col {
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 20px 18px;
+            min-height: 200px;
+        }
+        .explorar-col h2 {
+            font-size: 1.1rem;
+            margin: 0 0 14px;
+            color: var(--primary-dark);
+            text-align: left;
+            letter-spacing: 0;
+        }
+        .explorar-col h2 span {
+            font-weight: 400;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Cards de item dentro do explorar */
+        .explorar-item {
+            background: #e0f2f1;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.15s;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .explorar-item:hover {
+            background: #c5e8e4;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .explorar-item.is-active {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 2px 12px rgba(0,105,92,0.3);
+        }
+        .explorar-item.is-active .item-city-tag,
+        .explorar-item.is-active .item-desc {
+            color: rgba(255,255,255,0.8);
+        }
+        .explorar-item strong {
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: block;
+        }
+        .item-city-tag {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .item-desc {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+        .item-link-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+        .item-link-row a {
+            font-size: 0.75rem;
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .item-link-row a:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+        .explorar-item.is-active .item-link-row a {
+            background: rgba(255,255,255,0.25);
+            color: var(--white);
+        }
+        .explorar-item.is-active .item-link-row a:hover {
+            background: rgba(255,255,255,0.45);
+        }
+
+        /* Painel "próximos" (lado restaurantes quando um ponto é selecionado) */
+        .nearby-header {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #d5ecea;
+        }
+        .nearby-source {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            background: #f0faf9;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Estado vazio */
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 32px 16px;
+            font-size: 0.9rem;
+        }
+        .empty-state .empty-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Contagem de resultados */
+        .result-count {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        /* Dark mode */
+        body.dark-mode .explorar-hero { background: var(--white); }
+        body.dark-mode .explorar-hero p { color: #aaa; }
+        body.dark-mode .explorar-col { background: var(--white); }
+        body.dark-mode .explorar-item { background: #1d3a37; color: #d9f6f2; }
+        body.dark-mode .explorar-item:hover { background: #224743; }
+        body.dark-mode .explorar-item.is-active { background: var(--primary); color: #0d2d28; }
+        body.dark-mode .explorar-item.is-active .item-city-tag,
+        body.dark-mode .explorar-item.is-active .item-desc { color: rgba(13,45,40,0.75); }
+        body.dark-mode .item-city-tag { color: var(--accent); }
+        body.dark-mode .item-desc { color: #90b8b4; }
+        body.dark-mode .nearby-source { background: #1a3330; border-color: var(--accent); color: #b0d8d4; }
+        body.dark-mode .nearby-header { color: var(--accent); border-color: #2a4f4a; }
+        body.dark-mode .result-count { color: #6a9a96; }
+        body.dark-mode .explorar-item.is-active .item-link-row a { background: rgba(0,0,0,0.2); color: #0d2d28; }
+    </style>
+</head>
+<body data-page-id="explorar">
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="OndeVisitar.html">Pontos Turísticos</a>
+            <a href="OndeComer.html">Restaurantes</a>
+            <a href="OndeIrDicas.html">Dicas</a>
+            <a href="Explorar.html" class="active" aria-current="page">Explorar</a>
+        </nav>
+        <button id="theme-toggle" type="button" aria-label="Alternar tema" aria-pressed="false">🌙</button>
+    </header>
+
+    <main>
+        <div class="explorar-hero">
+            <h1>🔍 Explorar a Grande Vitória</h1>
+            <p>Filtre por cidade para ver pontos turísticos e restaurantes lado a lado, ou clique num ponto turístico para ver o que tem por perto.</p>
+            <div class="city-filters">
+                <button class="city-btn active" data-city="todas">Todas as cidades</button>
+                <button class="city-btn" data-city="vitoria">Vitória</button>
+                <button class="city-btn" data-city="vila-velha">Vila Velha</button>
+                <button class="city-btn" data-city="serra">Serra</button>
+                <button class="city-btn" data-city="fora">Fora da região</button>
+            </div>
+        </div>
+
+        <div class="explorar-grid">
+            <!-- Coluna Pontos Turísticos -->
+            <div class="explorar-col">
+                <h2>🌎 Pontos Turísticos <span id="spots-count"></span></h2>
+                <div class="result-count" id="spots-result-count"></div>
+                <div id="spots-list"></div>
+            </div>
+
+            <!-- Coluna Restaurantes / Próximos -->
+            <div class="explorar-col" id="restaurants-col">
+                <h2>🍽️ Restaurantes <span id="restaurants-count"></span></h2>
+                <div class="result-count" id="restaurants-result-count"></div>
+                <div id="nearby-header-area"></div>
+                <div id="restaurants-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <div class="map-modal-overlay">
+        <div class="map-modal-content">
+            <button class="map-close-btn">×</button>
+            <h3 id="map-modal-title">Mapa</h3>
+            <div class="map-responsive">
+                <iframe src="" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="map-button">Abrir no Google Maps</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+    // =============================================
+    // DADOS — extraídos dos HTMLs originais
+    // Quando você corrigir OndeComer com embed URLs,
+    // adicione data-lat e data-lng aqui para ativar
+    // distância real em km automaticamente.
+    // =============================================
+
+    const SPOTS = [
+        // --- Vitória ---
+        { id: 'paneleiras-de-goiabeiras', name: 'Paneleiras de Goiabeiras', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Paneleiras+de+Goiabeiras', 
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.743275612882!2d-40.303304499999996!3d-20.269479199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb819c059fff577%3A0x588641f76aca0f91!2sPaneleiras%20de%20Goiabeiras!5e0!3m2!1sen!2sbr!4v1757951190939!5m2!1sen!2sbr',
+          lat: -20.2695, lng: -40.3033 },
+        { id: 'palacio-anchieta', name: 'Palácio Anchieta', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Palácio+Anchieta',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.493999669813!2d-40.3397104!3d-20.3212011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83db078fa8693%3A0xc710cbd6f33bbd86!2sPal%C3%A1cio%20Anchieta!5e0!3m2!1sen!2sbr!4v1757951987545!5m2!1sen!2sbr',
+          lat: -20.3212, lng: -40.3397 },
+        { id: 'maes', name: 'Museu de Arte do ES (MAES)', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Museu+de+Artes+do+Espírito+Santo',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.524513112811!2d-40.33441019999999!3d-20.319939299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83db07defaa87%3A0xd2c2a854296fbc8a!2sMuseu%20de%20Artes%20do%20Esp%C3%ADrito%20Santo!5e0!3m2!1sen!2sbr!4v1757952407112!5m2!1sen!2sbr',
+          lat: -20.3199, lng: -40.3344 },
+        { id: 'sesc-gloria', name: 'Sesc Glória', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Sesc+Glória',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.508231280306!2d-40.3352925!3d-20.320612600000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83dbad8922f93%3A0xa09e11ed2521b5ee!2sSesc%20Gl%C3%B3ria!5e0!3m2!1sen!2sbr!4v1757952444159!5m2!1sen!2sbr',
+          lat: -20.3206, lng: -40.3353 },
+        { id: 'acasa-flor', name: 'A Casa Flor', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/A+Casa+Flor',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.5457103994195!2d-40.33849899999999!3d-20.3190627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83d5e5d2bd0c7%3Ab90fa06a90e23f65!2sA%20Casa%20Flor!5e0!3m2!1sen!2sbr!4v1757952471833!5m2!1sen!2sbr',
+          lat: -20.3191, lng: -40.3385 },
+        { id: 'mcv', name: 'Museu de Ciências da Vida (UFES)', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Museu+de+Ciências+da+Vida',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.5518115234136!2d-40.302423399999995!3d-20.2774143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81803c0b54b7d%3A0xea6c0a740387ed94!2sMuseu%20de%20Ci%C3%AAncias%20da%20Vida%20-%20MCV!5e0!3m2!1sen!2sbr!4v1757952611690!5m2!1sen!2sbr',
+          lat: -20.2774, lng: -40.3024 },
+        { id: 'cine-metropolis', name: 'Cine Metrópolis (UFES)', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Cine+Metrópolis',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14970.201637511924!2d-40.3085675!3d-20.2774724!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81803b880b19b%3A0x98a468f51c6f5c35!2sCine%20Metr%C3%B3polis!5e0!3m2!1sen!2sbr!4v1757952751116!5m2!1sen!2sbr',
+          lat: -20.2775, lng: -40.3024 },
+        { id: 'mucane', name: 'MUCANE – Museu Capixaba do Negro', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/MUCANE',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.5025290103604!2d-40.3414984!3d-20.320848400000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83db04fa67267%3A0xb3a0007f6057cce!2sMUCANE%20-%20Museu%20Capixaba%20do%20Negro!5e0!3m2!1sen!2sbr!4v1757952780651!5m2!1sen!2sbr',
+          lat: -20.3208, lng: -40.3415 },
+        { id: 'pier-de-iemanja', name: 'Píer de Iemanjá', city: 'vitoria', cityLabel: 'Vitória',
+          desc: 'Bom local para piqueniques e lazer ao ar livre',
+          mapsUrl: 'https://www.google.com/maps/place/Píer+de+Iemanjá',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.198527879881!2d-40.28615310000001!3d-20.292048099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb8178cf73c10eb%3A0xb70f84669f39f9bc!2sP%C3%ADer%20de%20Iemanj%C3%A1',
+          lat: -20.292, lng: -40.2862 },
+        { id: 'parque-fonte-grande', name: 'Parque da Fonte Grande', city: 'vitoria', cityLabel: 'Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Parque+Estadual+da+Fonte+Grande',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14966.926190311848!2d-40.348525813967576!3d-20.3114015545548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83d945cc66de5%3A0x9b00ef23d1682c9!2sParque%20Estadual%20da%20Fonte%20Grande!5e0!3m2!1sen!2sbr!4v1758163898402!5m2!1sen!2sbr',
+          lat: -20.3114, lng: -40.3414 },
+        // --- Vila Velha ---
+        { id: 'morro-do-moreno', name: 'Morro do Moreno', city: 'vila-velha', cityLabel: 'Vila Velha',
+          desc: 'Trilha e mirante com vista panorâmica da Grande Vitória',
+          mapsUrl: 'https://www.google.com/maps/place/Morro+do+Moreno',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.370512696845!2d-40.2774635!3d-20.326306799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81652ae6a178b%3Aa9fa17d57c1af295!2sMorro%20do%20Moreno!5e0!3m2!1sen!2sbr!4v1757952912691!5m2!1sen!2sbr',
+          lat: -20.3263, lng: -40.2775 },
+        { id: 'convento-da-penha', name: 'Convento da Penha', city: 'vila-velha', cityLabel: 'Vila Velha',
+          mapsUrl: 'https://www.google.com/maps/place/Convento+da+Penha',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.2965978569914!2d-40.287068999999995!3d-20.329362300000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb816498a913f37%3Aa2c5411362c10f93!2sConvento%20da%20Penha!5e0!3m2!1sen!2sbr!4v1757952940912!5m2!1sen!2sbr',
+          lat: -20.3294, lng: -40.2871 },
+        { id: 'farol-de-santa-luzia', name: 'Farol de Santa Luzia', city: 'vila-velha', cityLabel: 'Vila Velha',
+          mapsUrl: 'https://www.google.com/maps/place/Lighthouse+Santa+Luzia',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14965.658942235417!2d-40.2866188!3d-20.3244785!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817ab83631c57%3Af2d8777238238fe1!2sLighthouse%20Santa%20Luzia!5e0!3m2!1sen!2sbr!4v1757952964027!5m2!1sen!2sbr',
+          lat: -20.3245, lng: -40.2676 },
+        { id: 'praia-secreta', name: 'Praia Secreta', city: 'vila-velha', cityLabel: 'Vila Velha',
+          mapsUrl: 'https://www.google.com/maps/place/R.+Praia+Secreta',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.3930998974056!2d-40.2699674!3d-20.325373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817aa3a9bbd51%3A0xab92f38aec4b12e5!2sR.%20Praia%20Secreta',
+          lat: -20.3254, lng: -40.27 },
+        { id: 'museu-vale', name: 'Museu Vale', city: 'vila-velha', cityLabel: 'Vila Velha',
+          desc: 'Exposições de arte e eventos culturais',
+          mapsUrl: 'https://www.google.com/maps/place/Vale+Museum',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3741.3604451322094!2d-40.3478316!3d-20.326723!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83d113ac828e1%3Ac5e6358af776d872!2sVale%20Museum!5e0!3m2!1sen!2sbr!4v1757953075556!5m2!1sen!2sbr',
+          lat: -20.3267, lng: -40.3451 },
+        { id: 'batalhao-de-infantaria', name: '38º Batalhão de Infantaria', city: 'vila-velha', cityLabel: 'Vila Velha',
+          desc: 'Visita exige vestimenta adequada',
+          mapsUrl: 'https://www.google.com/maps/place/38º+Batalhão+de+Infantaria',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.4073705869864!2d-40.2867357!3d-20.324783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb8164ae8fd801b%3Abc51f0d89b68bbb7!2s38%C2%B0%20Batalh%C3%A3o%20de%20Infantaria',
+          lat: -20.3248, lng: -40.2867 },
+        // --- Serra ---
+        { id: 'igreja-dos-reis-magos', name: 'Igreja dos Reis Magos', city: 'serra', cityLabel: 'Serra',
+          desc: 'Igreja histórica tombada, datada do período colonial',
+          mapsUrl: 'https://www.google.com/maps/place/igreja+dos+reis+magos',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3747.8087331638717!2d-40.1922455!3d-20.0584526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb7f12233915ec1%3A0x7f2c840206b68616!2sChurch%20of%20the%20Magi!5e0!3m2!1sen!2sbr!4v1757953100562!5m2!1sen!2sbr',
+          lat: -20.0585, lng: -40.1922 },
+        // --- Fora ---
+        { id: 'domingos-martins', name: 'Domingos Martins', city: 'fora', cityLabel: 'Fora da região',
+          mapsUrl: 'https://www.google.com/maps/place/Domingos+Martins',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14961.701303643858!2d-40.6584558!3d-20.365345950000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb9b516e21b6539%3A0x6f177d0d615b9971!2sDomingos%20Martins',
+          lat: -20.3625, lng: -40.6582 },
+        { id: 'pedra-azul', name: 'Pedra Azul', city: 'fora', cityLabel: 'Fora da região',
+          mapsUrl: 'https://www.google.com/maps/place/Pico+Pedra+Azul',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14955.100550554516!2d-40.99363305194479!3d-20.433332647135437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb9985ca2b9de15%3A0x32d5c4edd38dd1b9!2sPico%20Pedra%20Azul!5e0!3m2!1sen!2sbr!4v1757953189602!5m2!1sen!2sbr',
+          lat: -20.4333, lng: -40.9833 },
+        { id: 'mosteiro-zen', name: 'Mosteiro Zen (Buda)', city: 'fora', cityLabel: 'Fora da região',
+          desc: 'Acesso externo gratuito. Entrada no mosteiro: R$20',
+          mapsUrl: 'https://www.google.com/maps/place/Mosteiro+ZEN',
+          embedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d30017.472263516305!2d-40.3971541!3d-19.8744495!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb79594af950b25%3A0x9022edda28395277!2sMosteiro%20ZEN!5e0!3m2!1sen!2sbr!4v1757953298510!5m2!1sen!2sbr',
+          lat: -19.8659, lng: -40.3827 },
+    ];
+
+    // Restaurantes — cidade inferida dos agrupamentos do OndeComer.html
+    // Nota: links curtos do Maps não têm coordenadas extraíveis.
+    // Quando você corrigir o OndeComer com embed URLs, adicione lat/lng aqui.
+    const RESTAURANTS = [
+        // Serra
+        { id: 'mahai-serra', name: 'Mahai', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/9u9PDhmT35qaN3JGA' },
+        { id: 'restaurante-lagoa-juara', name: 'Restaurante Lagoa Juara', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/dzH2kt6JW8x4BHqh7' },
+        { id: 'petisco-das-meninas-manguinhos', name: 'Petisco das Meninas (Manguinhos)', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/KuDTHnALbYsLbYgg8' },
+        { id: 'petisco-das-meninas-colina', name: 'Petisco das Meninas (Colina)', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/Ev2L6FtybhaLygFJ8' },
+        { id: 'lansavi', name: 'Lansavi', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/76QRZrrf56MAmtEj8' },
+        { id: 'silvas', name: 'Silvas', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/ZLYqrmrVu4rTkySX8' },
+        { id: 'praio-gastrobar', name: 'Praiô Gastrobar', city: 'serra', cityLabel: 'Serra', mapsUrl: 'https://maps.app.goo.gl/hgjKt5ApZU3nyZhv7' },
+        // Vitória
+        { id: 'tero-brasa-e-vinho', name: 'Tero Brasa e Vinho', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/pFCrJLEk3MzxQfrY6' },
+        { id: 'la-dolina', name: 'La Dolina — Restaurante Argentino', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/vjGRoHPjh47nDLJJ6' },
+        { id: 'o-quintal-parrilla-bar', name: 'O Quintal Parrilla Bar', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/M7S2KbJmAL3hmZDu8' },
+        { id: 'alas', name: 'Alas', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/ofYtCwFiEyCA5aPV9' },
+        { id: 'restaurante-el-gitano', name: 'Restaurante El Gitano', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/9rETdTdtrNFQsE7HA' },
+        { id: 'bistro-saldanha', name: 'Bistrô Saldanha', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/h9KtD9sXbGDZZwSeA' },
+        { id: 'meatpack', name: 'Meatpack', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/advBwBxP9KjDiN6EA' },
+        { id: 'restaurante-caieiras', name: 'Restaurante Caieiras', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/YEZ66uJsGoF6mLDe7' },
+        { id: 'poke-beach-vitoria', name: 'Poke Beach', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/uC8y2P5RDLAihBMB6' },
+        { id: 'restaurante-banzai', name: 'Restaurante Banzai', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/PVyVTEyEteAytFKS8' },
+        { id: 'comarella-pizza-burger', name: 'Comarella Pizza & Burger', city: 'vitoria', cityLabel: 'Vitória', mapsUrl: 'https://maps.app.goo.gl/dGgnDoNMAqm518S38' },
+    ];
+
+    // =============================================
+    // LÓGICA DA PÁGINA
+    // =============================================
+
+    let activeCity = 'todas';
+    let activeSpotId = null;
+
+    // Calcula distância em km entre duas coordenadas (fórmula de Haversine)
+    function distKm(lat1, lng1, lat2, lng2) {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLng = (lng2 - lng1) * Math.PI / 180;
+        const a = Math.sin(dLat/2)**2 + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2)**2;
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    function openMapModal(embedUrl, name, mapsUrl) {
+        const overlay = document.querySelector('.map-modal-overlay');
+        const iframe  = overlay?.querySelector('iframe');
+        const titleEl = document.querySelector('#map-modal-title');
+        const gmBtn   = overlay?.querySelector('.map-button');
+        if (!overlay || !iframe) return;
+        iframe.src = embedUrl;
+        if (titleEl) titleEl.textContent = 'Mapa: ' + name;
+        if (gmBtn) {
+            if (mapsUrl) { gmBtn.style.display = 'block'; gmBtn.href = mapsUrl; }
+            else gmBtn.style.display = 'none';
+        }
+        overlay.classList.add('is-visible');
+    }
+
+    function buildSpotCard(spot, isActive) {
+        const div = document.createElement('div');
+        div.className = 'explorar-item' + (isActive ? ' is-active' : '');
+        div.dataset.id = spot.id;
+
+        let html = `<strong>${spot.name}</strong>
+                    <span class="item-city-tag">📍 ${spot.cityLabel}</span>`;
+        if (spot.desc) html += `<span class="item-desc">${spot.desc}</span>`;
+        html += `<div class="item-link-row">`;
+        if (spot.embedUrl) html += `<a href="${spot.mapsUrl}" class="spot-map-link" data-embed="${spot.embedUrl}" data-name="${spot.name}" data-maps="${spot.mapsUrl}">Ver no mapa</a>`;
+        html += `</div>`;
+        div.innerHTML = html;
+
+        // Clique no card = selecionar ponto e mostrar próximos
+        div.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return; // deixa o link funcionar normalmente
+            activeSpotId = (activeSpotId === spot.id) ? null : spot.id;
+            renderAll();
+        });
+
+        // Clique no link "Ver no mapa"
+        div.querySelector('.spot-map-link')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openMapModal(spot.embedUrl, spot.name, spot.mapsUrl);
+        });
+
+        return div;
+    }
+
+    function buildRestaurantCard(restaurant, distLabel) {
+        const div = document.createElement('div');
+        div.className = 'explorar-item';
+        div.dataset.id = restaurant.id;
+
+        let html = `<strong>${restaurant.name}</strong>
+                    <span class="item-city-tag">📍 ${restaurant.cityLabel}${distLabel ? ' · ' + distLabel : ''}</span>
+                    <div class="item-link-row">
+                        <a href="${restaurant.mapsUrl}" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+                    </div>`;
+        div.innerHTML = html;
+        return div;
+    }
+
+    function renderAll() {
+        const spotsList  = document.getElementById('spots-list');
+        const restList   = document.getElementById('restaurants-list');
+        const nearbyArea = document.getElementById('nearby-header-area');
+        const spotsCount = document.getElementById('spots-result-count');
+        const restCount  = document.getElementById('restaurants-result-count');
+        const restColTitle = document.querySelector('#restaurants-col h2');
+
+        // Filtra por cidade
+        const filteredSpots = SPOTS.filter(s => activeCity === 'todas' || s.city === activeCity);
+        const filteredRests = RESTAURANTS.filter(r => activeCity === 'todas' || r.city === activeCity);
+
+        // Renderiza pontos turísticos
+        spotsList.innerHTML = '';
+        if (filteredSpots.length === 0) {
+            spotsList.innerHTML = '<div class="empty-state"><span class="empty-icon">🌎</span>Nenhum ponto turístico nesta cidade ainda.</div>';
+        } else {
+            filteredSpots.forEach(spot => {
+                spotsList.appendChild(buildSpotCard(spot, spot.id === activeSpotId));
+            });
+        }
+        spotsCount.textContent = filteredSpots.length > 0 ? `${filteredSpots.length} ${filteredSpots.length === 1 ? 'local' : 'locais'}` : '';
+
+        // Renderiza restaurantes — com ou sem ponto selecionado
+        restList.innerHTML = '';
+        nearbyArea.innerHTML = '';
+
+        const activeSpot = SPOTS.find(s => s.id === activeSpotId);
+
+        if (activeSpot) {
+            // Modo "próximos": filtra restaurantes pela mesma cidade do ponto selecionado
+            restColTitle.innerHTML = '🍽️ Restaurantes <span>por perto</span>';
+
+            nearbyArea.innerHTML = `
+                <div class="nearby-header">Próximos a:</div>
+                <div class="nearby-source">${activeSpot.name} — ${activeSpot.cityLabel}</div>`;
+
+            // Restaurantes da mesma cidade, ordenados por distância se tiver coords
+            let nearbyRests = RESTAURANTS.filter(r => r.city === activeSpot.city);
+
+            if (activeSpot.lat && nearbyRests.some(r => r.lat)) {
+                nearbyRests = nearbyRests
+                    .map(r => ({ ...r, dist: r.lat ? distKm(activeSpot.lat, activeSpot.lng, r.lat, r.lng) : null }))
+                    .sort((a, b) => (a.dist ?? 999) - (b.dist ?? 999));
+            }
+
+            if (nearbyRests.length === 0) {
+                restList.innerHTML = `<div class="empty-state"><span class="empty-icon">🍽️</span>Nenhum restaurante cadastrado em ${activeSpot.cityLabel} ainda.</div>`;
+            } else {
+                nearbyRests.forEach(r => {
+                    const distLabel = r.dist ? `~${r.dist.toFixed(1)} km` : null;
+                    restList.appendChild(buildRestaurantCard(r, distLabel));
+                });
+            }
+            restCount.textContent = nearbyRests.length > 0 ? `${nearbyRests.length} encontrados` : '';
+        } else {
+            // Modo normal: mostra restaurantes filtrados por cidade
+            restColTitle.innerHTML = '🍽️ Restaurantes <span id="restaurants-count"></span>';
+
+            if (filteredRests.length === 0) {
+                restList.innerHTML = '<div class="empty-state"><span class="empty-icon">🍽️</span>Nenhum restaurante nesta cidade ainda.</div>';
+            } else {
+                filteredRests.forEach(r => restList.appendChild(buildRestaurantCard(r, null)));
+            }
+            restCount.textContent = filteredRests.length > 0 ? `${filteredRests.length} restaurantes` : '';
+        }
+    }
+
+    // Filtros de cidade
+    document.querySelectorAll('.city-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCity = btn.dataset.city;
+            activeSpotId = null; // reseta seleção ao trocar cidade
+            renderAll();
+        });
+    });
+
+    // Modal: fechar
+    const overlay = document.querySelector('.map-modal-overlay');
+    const closeBtn = document.querySelector('.map-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('is-visible'));
+    overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('is-visible'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') overlay?.classList.remove('is-visible'); });
+
+    // Inicia
+    renderAll();
+    </script>
+</body>
+</html>
