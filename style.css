@@ -1,195 +1,419 @@
-/* --- Paleta de Cores e Variáveis Globais --- */
-/* Definir as cores aqui permite reutilizá-las em todo o site. Se quiser mudar o tema, basta alterar aqui. */
+/* ============================================================
+   TURISMO NA GRANDE VITÓRIA — style.css
+   Paleta inspirada na bandeira oficial do Espírito Santo
+   Azul #0096E1 · Rosa #F09BBE · Laranja #F27C2A
+   Verde #2E7D4F · Areia #FAF6EE
+   ============================================================ */
+
+/* --- Variáveis Globais --- */
 :root {
-    --primary: #00695c;      /* Verde principal */
-    --primary-dark: #004d40; /* Verde escuro para textos e fundos de botões */
-    --accent: #00bfae;      /* Verde claro para destaques e efeitos hover */
-    --background: #f8f9fa;  /* Cinza muito claro para o fundo da página */
-    --white: #fff;           /* Branco */
-    --shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra suave padrão */
+    /* Cores principais */
+    --primary:       #0096E1;   /* Azul oficial da bandeira */
+    --primary-dark:  #006bab;   /* Azul escuro para textos e fundos */
+    --primary-light: #e0f4fd;   /* Azul bem claro para fundos de card */
+
+    --rosa:          #F09BBE;   /* Rosa oficial da bandeira */
+    --rosa-dark:     #c4608a;   /* Rosa escuro para texto sobre fundo claro */
+    --rosa-light:    #fde8f2;   /* Rosa claro para fundos */
+
+    --laranja:       #F27C2A;   /* Laranja vivo — terceira cor */
+    --laranja-dark:  #b85510;   /* Laranja escuro para texto */
+    --laranja-light: #fdecd8;   /* Laranja claro para fundos */
+
+    --verde:         #2E7D4F;   /* Verde serra — visitado, natureza */
+    --verde-light:   #eaf4ee;   /* Verde claro para fundos */
+
+    --areia:         #FAF6EE;   /* Fundo suave, hero, sections */
+    --areia-dark:    #ede6d4;   /* Areia mais escura para bordas */
+
+    /* Neutros */
+    --background:    #F2F6FA;
+    --white:         #ffffff;
+    --text:          #1a2a3a;
+    --text-muted:    #5a6a7a;
+    --shadow:        0 2px 10px rgba(0, 100, 180, 0.10);
+    --shadow-md:     0 4px 16px rgba(0, 100, 180, 0.14);
 }
 
-/* --- Estilos de Base --- */
-/* Regras fundamentais que se aplicam a toda a página. */
-html {
-    background-color: var(--background); /* Garante que a cor de fundo cubra 100% da janela */
-}
+/* --- Base --- */
+html { background-color: var(--background); }
+
 body {
-    display: flex;             /* Ativa o layout flexbox para o corpo da página */
-    flex-direction: column;    /* Organiza os elementos principais (header, main, footer) em uma coluna */
-    min-height: 100vh;         /* Garante que a página tenha no mínimo a altura da tela (técnica do "sticky footer") */
-    font-family: 'Segoe UI', Arial, sans-serif; /* Fonte padrão */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background: var(--background);
-    color: #333;
+    color: var(--text);
     margin: 0;
     padding: 0;
 }
-main {
-    flex: 1; /* Faz o conteúdo principal esticar-se para empurrar o rodapé para o fundo */
+
+main { flex: 1; }
+
+/* --- Header e Navegação --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    background: var(--primary-dark);
+    padding: 14px 20px;
+    box-shadow: 0 2px 12px rgba(0, 80, 160, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
-/* --- Cabeçalho e Navegação --- */
-header {
-    position: sticky; /* Faz o cabeçalho ficar fixo no topo ao rolar a página */
-    top: 0;
-    z-index: 1001; /* Garante que o cabeçalho fique acima do conteúdo, mas abaixo do pop-up do mapa */
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 nav {
     display: flex;
-    justify-content: center; /* Centraliza os botões de navegação */
-    flex-wrap: nowrap;     /* Impede que os botões quebrem a linha em telas pequenas */
-    gap: 8px;              /* Espaço entre os botões */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
     margin: 0 10px;
 }
+
 nav a {
-    color: var(--white);
-    background: var(--primary-dark);
-    padding: 8px 18px;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.10);
+    padding: 7px 16px;
     border-radius: 20px;
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.95rem;
     transition: background 0.2s, color 0.2s;
-    white-space: nowrap; /* Impede que o texto dentro do botão se parta em duas linhas */
-}
-/* Efeito para quando o mouse passa por cima ou o link está ativo */
-nav a:hover, nav a.active {
-    background: var(--accent);
-    color: var(--primary-dark);
-    font-weight: bold;
+    white-space: nowrap;
 }
 
-/* --- Bloco "Hero" (Página Inicial) --- */
-.hero {
-    max-width: 950px; margin: 40px auto; background: var(--white); padding: 0;
-    border-radius: 18px; box-shadow: var(--shadow); overflow: hidden;
-    display: flex; flex-wrap: wrap; align-items: stretch;
+nav a:hover {
+    background: var(--rosa);
+    color: var(--primary-dark);
+    font-weight: 600;
 }
+
+nav a.active {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 150, 225, 0.35);
+}
+
+/* --- Tema Toggle --- */
+#theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: rgba(255, 255, 255, 0.13);
+    color: var(--white);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background .2s;
+}
+#theme-toggle:hover { background: var(--rosa); color: var(--primary-dark); }
+
+/* --- Hero (Página Inicial) --- */
+.hero {
+    max-width: 950px;
+    margin: 36px auto;
+    background: var(--white);
+    padding: 0;
+    border-radius: 18px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    border-top: 4px solid var(--primary);
+}
+
 .hero-img {
-    flex: 1 1 320px; min-width: 260px;
+    flex: 1 1 320px;
+    min-width: 260px;
     background: url('https://blog.aguiabranca.com.br/wp-content/uploads/2024/02/vila-velha_convento_2_tadeu-bianconi-scaled-1-1024x725.jpg') center center/cover no-repeat;
     min-height: 260px;
-}
-.hero-content {
-    flex: 1 1 50%; padding: 32px 40px; display: flex;
-    flex-direction: column; justify-content: center;
-}
-.hero-btns {
-    display: flex; flex-direction: column; gap: 18px;
-    align-items: stretch; margin-top: 28px;
-}
-.hero-btns a {
-    background: var(--primary); color: var(--white); padding: 16px 24px;
-    border-radius: 18px; font-size: 1.2rem; font-weight: bold;
-    text-align: center; text-decoration: none; box-shadow: var(--shadow);
-    transition: background 0.2s, transform 0.2s;
-}
-.hero-btns a:hover {
-    background: var(--accent); color: var(--primary-dark); transform: translateY(-2px);
+    position: relative;
 }
 
-/* --- Estilos de Conteúdo Geral --- */
+/* Faixa de cor sobre a imagem remetendo à bandeira */
+.hero-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary) 33%, #fff 33%, #fff 66%, var(--rosa) 66%);
+}
+
+.hero-content {
+    flex: 1 1 50%;
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--areia);
+}
+
+.hero-content h2 {
+    text-align: left;
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.hero-content p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.hero-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 24px;
+}
+
+.hero-btns a {
+    background: var(--primary);
+    color: var(--white);
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: background 0.2s, transform 0.15s;
+}
+
+.hero-btns a:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.hero-btns a:nth-child(2) {
+    background: var(--rosa);
+    color: var(--primary-dark);
+}
+
+.hero-btns a:nth-child(2):hover {
+    background: var(--rosa-dark);
+    color: var(--white);
+}
+
+/* --- Sections --- */
 section {
-    max-width: 900px; margin: 40px auto; background: var(--white);
-    padding: 32px 24px; border-radius: 18px; box-shadow: var(--shadow);
+    max-width: 900px;
+    margin: 36px auto;
+    background: var(--white);
+    padding: 32px 28px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
 }
+
 h2 {
-    text-align: center; margin-top: 0; color: var(--primary-dark);
-    font-size: 2rem; letter-spacing: 1px;
+    text-align: center;
+    margin-top: 0;
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+    letter-spacing: 0.5px;
 }
+
 h3 {
-    margin-top: 32px; color: var(--primary);
+    margin-top: 32px;
+    color: var(--primary);
+    font-size: 1.1rem;
+    border-left: 4px solid var(--primary);
+    padding-left: 10px;
 }
-ul {
-    list-style: none; padding: 0;
-}
+
+ul { list-style: none; padding: 0; }
+
+/* --- Itens de Lista (li) --- */
 li {
-    font-weight: 500; 
-    margin: 18px 0; 
-    background: #e0f2f1;
-    border-radius: 10px; 
+    font-weight: 500;
+    margin: 14px 0;
+    background: var(--primary-light);
+    border-radius: 12px;
     padding: 12px 90px 12px 50px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03); 
+    box-shadow: 0 1px 4px rgba(0, 100, 180, 0.06);
     position: relative;
     flex-wrap: wrap;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     transition: background .2s, box-shadow .2s;
+    border-left: 3px solid var(--primary);
 }
 
-li:hover { 
-    background:#d5ecea; 
+li:hover {
+    background: #cce8f8;
+    box-shadow: var(--shadow);
 }
 
-/* Dark mode */
-body.dark-mode .route-planning-mode li.is-selected {
-    background: #21524c;
-    box-shadow: 0 0 0 3px var(--accent);
-}
-body.dark-mode .route-planning-mode li.is-selected:hover {
-    background: #21524c;
-    box-shadow: 0 0 0 3px var(--accent);
-}
+/* Estrutura interna do li */
+li > strong { flex-grow: 1; color: var(--primary-dark); }
 
-/* Se já usa li.is-favorited com box-shadow, manter a borda por cima */
-.route-planning-mode li.is-favorited.is-selected::after {
-    border-color: var(--accent);
-}
-
-/* Container para os botões de link dentro de um <li> */
+li > a,
+li > .desc,
 .link-actions {
-    margin-top: 8px;
+    flex-basis: 100%;
+    margin-top: 6px;
 }
 
-/* Estilo para os novos botões de link */
+.desc {
+    display: block;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.95em;
+    margin-top: 2px;
+}
+
+/* Botão visitado (esquerda) */
+.visited-btn {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.35;
+    filter: grayscale(1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Botões favorito/ignorar (direita) */
+.item-actions {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    gap: 6px;
+}
+
+.favorite-btn,
+.dismiss-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.35;
+    filter: grayscale(1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Estados ativos */
+li.is-visited { opacity: 0.7; }
+li.is-visited > strong { text-decoration: line-through; color: var(--text-muted); }
+li.is-dismissed { opacity: 0.45; filter: grayscale(1); }
+
+li.is-visited .visited-btn,
+li.is-favorited .favorite-btn,
+li.is-dismissed .dismiss-btn {
+    opacity: 1;
+    filter: grayscale(0);
+}
+
+/* li favoritado com sotaque rosa */
+li.is-favorited {
+    border-left-color: var(--rosa);
+    background: var(--rosa-light);
+}
+li.is-favorited:hover { background: #f8d5e6; }
+
+/* --- Links de ação (action-link) --- */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+a:hover { color: var(--primary-dark); text-decoration: underline; }
+
 .action-link {
-    display: inline-block; /* Permite aplicar padding e margin */
+    display: inline-block;
     background: var(--primary);
     color: var(--white);
-    padding: 5px 12px;
-    border-radius: 16px; /* Bordas arredondadas */
+    padding: 4px 12px;
+    border-radius: 16px;
     font-size: 0.85rem;
     font-weight: 500;
     text-decoration: none;
-    margin-right: 8px;
+    margin-right: 6px;
     transition: background 0.2s;
 }
-
 .action-link:hover {
-    background: var(--accent);
+    background: var(--primary-dark);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* --- Botões de controle (Favoritos / Rota) --- */
+.main-actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+#toggle-favorites-btn,
+#toggle-route-mode-btn {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#toggle-favorites-btn:hover,
+#toggle-route-mode-btn:hover {
+    background: var(--rosa);
     color: var(--primary-dark);
-    text-decoration: none; /* Remove o sublinhado ao passar o mouse */
 }
 
-a {
-    color: var(--primary); text-decoration: none;
-    font-weight: 500; transition: color 0.2s;
+/* Seção de favoritos */
+#favorites-section {
+    display: none;
+    border-top: 1px solid var(--areia-dark);
+    margin-top: 32px;
+    padding-top: 24px;
 }
-a:hover {
-    color: var(--accent); text-decoration: underline;
+#favorites-section.is-visible { display: block; }
+#favorites-list .empty-message {
+    text-align: center;
+    color: var(--text-muted);
+    background: none;
+    box-shadow: none;
+    padding: 20px;
 }
-.desc {
-    display: block; color: #555; font-weight: 400;
-    margin-top: 4px; font-size: 0.98em;
-}
+#favorites-list li { display: flex; align-items: center; gap: 15px; }
+#favorites-list input[type="checkbox"] { min-width: 18px; min-height: 18px; }
 
-/* --- Componente do Mapa (Modal e Ícone) --- */
-/* Ícone do Mapa (o de baixo) */
+/* --- Modal de Mapa --- */
 .map-icon-toggle {
     position: fixed;
-    bottom: 20px; /* Distância da base da tela */
+    bottom: 20px;
     right: 20px;
     z-index: 998;
-    
-    /* Tamanho Padrão */
     width: 50px;
     height: 50px;
-    font-size: 1.5rem; 
-
-    /* ...outros estilos que já estavam corretos... */
+    font-size: 1.5rem;
     background-color: var(--primary);
     color: var(--white);
     border: none;
@@ -198,434 +422,315 @@ a:hover {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s, background 0.2s;
 }
 .map-icon-toggle:hover {
-    transform: scale(1.1); box-shadow: var(--shadow);
+    transform: scale(1.1);
+    background: var(--primary-dark);
 }
+
 .map-modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7); display: flex; align-items: center;
-    justify-content: center; opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease; z-index: 1002; /* Ordem: Pop-up do mapa (topo de tudo) */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 30, 60, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1002;
 }
-/* Classe adicionada via JavaScript para tornar o modal visível */
-.map-modal-overlay.is-visible {
-    opacity: 1; pointer-events: auto;
-}
+.map-modal-overlay.is-visible { opacity: 1; pointer-events: auto; }
+
 .map-modal-content {
-    background: var(--white); padding: 20px; border-radius: 12px;
-    width: 90%; max-width: 800px; position: relative;
-    transform: scale(0.9); transition: transform 0.3s ease;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    transform: scale(0.92);
+    transition: transform 0.3s ease;
+    border-top: 4px solid var(--primary);
 }
-.map-modal-overlay.is-visible .map-modal-content {
-    transform: scale(1);
-}
+.map-modal-overlay.is-visible .map-modal-content { transform: scale(1); }
+
 .map-close-btn {
-    position: absolute; top: -10px; right: -10px; background: var(--primary-dark);
-    color: white; border: none; border-radius: 50%; width: 30px; height: 30px;
-    font-size: 1.5rem; line-height: 30px; text-align: center; cursor: pointer;
+    position: absolute;
+    top: -12px; right: -12px;
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    font-size: 1.4rem;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
     box-shadow: var(--shadow);
 }
+
 #map-modal-title {
-    text-align: center; margin-top: 0; margin-bottom: 15px; color: var(--primary-dark);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
 }
+
 .map-responsive {
-    position: relative; width: 100%; padding-bottom: 56.25%; /* Truque para manter a proporção 16:9 */
-    height: 0; overflow: hidden; border-radius: 12px;
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
 }
 .map-responsive iframe {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
-}
-
-/* --- ESTRUTURA E ALINHAMENTO DOS ITENS DA LISTA --- */
-
-/* 2. O nome do lugar */
-li > strong {
-    flex-grow: 1; /* Empurra os botões para a extrema direita */
-}
-
-/* 3. Botão de Check (Esquerda) */
-.visited-btn {
     position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    
-    /* Estilos base do botão */
-    background: none; border: none; padding: 0;
-    font-size: 1.2rem; cursor: pointer; opacity: 0.4;
-    filter: grayscale(1); transition: all 0.2s ease-in-out;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
 }
 
-/* 4. Grupo de botões de Favorito/Ignorar (Direita) */
-.item-actions {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    
-    display: inline-flex;
-    gap: 8px;
-}
-
-/* 5. Botões de Favorito/Ignorar (Dentro do .item-actions) */
-.favorite-btn,
-.dismiss-btn {
-    background: none; border: none; padding: 0;
-    font-size: 1.2rem; cursor: pointer; opacity: 0.4;
-    filter: grayscale(1); transition: all 0.2s ease-in-out;
-}
-
-/* 6. Links e Descrição (Força a quebra para a linha de baixo) */
-li > a,
-li > .desc,
-.link-actions {
-    flex-basis: 100%;
-    margin-top: 8px;
-}
-
-/* --- ESTADOS DOS ITENS E BOTÕES (ATIVADOS VIA JS) --- */
-
-/* Efeito no LI quando marcado como VISITADO */
-li.is-visited {
-    opacity: 0.7;
-}
-li.is-visited > strong { 
-    text-decoration: line-through;
-    color: #555;
-}
-
-/* Efeito no LI quando marcado como IGNORADO */
-li.is-dismissed {
-    opacity: 0.5;
-    filter: grayscale(1);
-}
-
-/* Efeito para TODOS os botões quando seu estado correspondente está ativo */
-li.is-visited .visited-btn,
-li.is-favorited .favorite-btn,
-li.is-dismissed .dismiss-btn {
-    opacity: 1;
-    filter: grayscale(0);
-}
-
-/* --- SEÇÃO DE FAVORITOS E OUTROS BOTÕES --- */
-
-/* Botões no painel de controle superior (Favoritos e Planejar Rota) */
-#toggle-favorites-btn, #toggle-route-mode-btn {
-    background: var(--primary-dark);
+.map-button {
+    display: block;
+    margin: 14px auto 0;
+    width: fit-content;
+    background: var(--primary);
     color: var(--white);
-    padding: 8px 18px;
+    padding: 8px 22px;
     border-radius: 20px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
     transition: background 0.2s;
 }
-
-/* Efeito HOVER unificado para todos eles */
-#toggle-favorites-btn:hover, 
-#toggle-route-mode-btn:hover {
-    background: var(--accent);
-    color: var(--primary-dark);
+.map-button:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    text-decoration: none;
 }
-
-#favorites-section {
-    display: none;
-    border-top: 1px solid #eee; margin-top: 32px; padding-top: 24px;
-}
-#favorites-section.is-visible { display: block; }
-#favorites-list .empty-message {
-    text-align: center; color: #777; background: none; box-shadow: none; padding: 20px;
-}
-#favorites-list li { display: flex; align-items: center; gap: 15px; }
-#favorites-list input[type="checkbox"] { min-width: 18px; min-height: 18px; }
 
 /* --- Botão Voltar ao Topo --- */
 #back-to-top {
-    display: none; /* Começa escondido por padrão */
-    position: fixed; /* Fica fixo na tela durante o scroll */
-    bottom: 80px; /* Distância da base (para não sobrepor o ícone do mapa) */
-    right: 20px;  /* Distância da direita */
-    z-index: 999; /* Garante que fique acima do conteúdo */
-    
-    /* Estilos visuais */
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 999;
     width: 50px;
     height: 50px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     background-color: var(--primary-dark);
     color: var(--white);
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    
-    /* Centraliza o ícone dentro do botão */
-    display: flex;
     align-items: center;
     justify-content: center;
-    
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.3s, transform 0.2s;
 }
+#back-to-top:hover { opacity: 0.85; transform: translateY(-2px); }
 
-#back-to-top:hover {
-    opacity: 0.8;
-    transform: translateY(-2px);
-}
-/* --- Rodapé --- */
-footer {
-    background: var(--primary-dark); /* Fundo verde escuro, para combinar com o site */
-    color: #e0e0e0; /* Cor de texto clara */
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px; /* Cria um espaço entre o conteúdo principal e o rodapé */
-}
-footer a {
-    color: #b2dfdb; /* Verde claro para links no rodapé */
-    text-decoration: none;
-    font-weight: 500;
-}
-footer a:hover {
-    text-decoration: underline;
-    color: var(--accent);
-}
+/* --- Modo Planejamento de Rota --- */
+.route-planning-mode #create-route-btn { display: none; }
 
-/* Acessibilidade: foco visível consistente */
-:where(a, button, .visited-btn, .favorite-btn, .dismiss-btn, .map-icon-toggle, .route-fab, input, select, textarea)
-:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 6px;
-}
-
-/* Opcional: remover o contorno padrão no clique do mouse sem afetar teclado */
-:focus:not(:focus-visible) {
-    outline: none;
-}
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 700px) {
-    section { padding: 18px 6vw; margin: 24px 2vw 0 2vw; }
-    h2 { font-size: 1.5rem; }
-    nav a { padding: 7px 12px; font-size: 0.9rem; }
-}
-/* Contêiner para os botões de ação principais */
-.main-actions-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px; /* Adiciona um espaço antes da lista de locais */
-}
-
-/* --- Estilos do Modo de Planejamento de Rota --- */
-
-/* Quando o body tem a classe 'route-planning-mode', estes estilos são ativados */
-
-/* Esconde o botão de rota antigo quando o modo novo está ativo */
-.route-planning-mode #create-route-btn {
-    display: none;
-}
-
-/* 1. Muda o cursor para indicar que os itens da lista são clicáveis */
 .route-planning-mode li[data-id] {
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
-/* 2. Adiciona um efeito de "levantar" ao passar o mouse por cima */
 .route-planning-mode li[data-id]:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
 }
-
-/* 3. Esconde os botões de ação originais para não confundir */
 .route-planning-mode .item-actions,
 .route-planning-mode .visited-btn {
     opacity: 0.2;
-    pointer-events: none; /* Desativa cliques nos botões antigos */
+    pointer-events: none;
 }
 
-/* --- Botão Flutuante (FAB) de Gerar Rota --- */
-.route-fab {
-    display: none; /* Começa escondido */
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%); /* Truque para centralizar perfeitamente */
-    z-index: 1000;
-    
-    padding: 12px 24px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    background-color: var(--accent);
-    color: var(--primary-dark);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-    transition: all 0.3s ease;
-}
-
-/* Mostra o botão APENAS quando o modo de planejamento está ativo */
-.route-planning-mode .route-fab {
-    display: block;
-}
-
-/* === Dark Mode ===================================================== */
-#theme-toggle {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    background: var(--primary-dark);
-    color: var(--white);
-    border: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    transition: background .2s;
-}
-#theme-toggle:hover { background: var(--accent); color: var(--primary-dark); }
-
-body.dark-mode {
-    --background:#0f1f1d;
-    --white:#142826;
-    --primary:#00bfae;
-    --primary-dark:#008d7d;
-    --accent:#26ffd8;
-    color:#d9f6f2;
-}
-body.dark-mode header {
-    background: linear-gradient(90deg,#004d45,#00bfae);
-}
-body.dark-mode section,
-body.dark-mode .hero,
-body.dark-mode .map-modal-content {
-    background: var(--white);
-}
-body.dark-mode li {
-    background:#1d3a37;
-    color:#d9f6f2;
-}
-body.dark-mode li:hover {
-    background:#224743;
-}
-
-body.dark-mode nav a {
-    background:#0f3b36;
-    color:#d9f6f2;
-}
-body.dark-mode nav a:hover,
-body.dark-mode nav a.active {
-    background:var(--accent);
-    color:#0d2d28;
-}
-body.dark-mode .action-link {
-    background:#0f3b36;
-    color:#d9f6f2;
-}
-body.dark-mode .action-link:hover {
-    background:var(--accent);
-    color:#0d2d28;
-}
-body.dark-mode #back-to-top,
-body.dark-mode .map-icon-toggle,
-body.dark-mode .route-fab {
-    box-shadow:0 4px 15px rgba(0,0,0,0.6);
-}
-body.dark-mode footer {
-    background:#082422;
-    color:#b9e9e3;
-}
-body.dark-mode a { color: var(--accent); }
-body.dark-mode a:hover { color:#7affeb; }
-
-/* Legibilidade: no modo claro, texto escuro quando o item selecionado tem fundo claro */
-body:not(.dark-mode) .route-planning-mode li.is-selected,
-body:not(.dark-mode) .route-planning-mode li.is-selected:hover {
-    color: #0d2d28;
-}
-
-body:not(.dark-mode) .route-planning-mode li.is-selected > strong,
-body:not(.dark-mode) .route-planning-mode li.is-selected .desc,
-body:not(.dark-mode) .route-planning-mode li.is-selected a {
-    color: #0d2d28 !important;
-}
-
-/* Hover dos links dentro do item selecionado (modo claro) */
-body:not(.dark-mode) .route-planning-mode li.is-selected a:hover {
-    color: #08302b !important;
-}
-
-/* Seleção consistente e legível no Planejar Rota */
+/* Selecionado — modo claro */
 body.route-planning-mode:not(.dark-mode) li.is-selected,
 body.route-planning-mode:not(.dark-mode) li.is-selected:hover,
 body.route-planning-mode:not(.dark-mode) li.is-selected:focus {
-    background: #d5f6f2 !important;
-    box-shadow: 0 0 0 3px var(--accent) !important;
-    color: #0d2d28 !important; /* texto escuro no fundo claro */
+    background: var(--primary-light) !important;
+    box-shadow: 0 0 0 3px var(--primary) !important;
+    color: var(--primary-dark) !important;
 }
 body.route-planning-mode:not(.dark-mode) li.is-selected > strong,
 body.route-planning-mode:not(.dark-mode) li.is-selected .desc,
-body.route-planning-mode:not(.dark-mode) li.is-selected a {
-    color: #0d2d28 !important;
-}
+body.route-planning-mode:not(.dark-mode) li.is-selected a { color: var(--primary-dark) !important; }
 body.route-planning-mode:not(.dark-mode) li.is-selected .action-link {
     color: var(--white) !important;
     background: var(--primary) !important;
 }
 body.route-planning-mode:not(.dark-mode) li.is-selected .action-link:hover {
-    color: var(--primary-dark) !important;
-    background: var(--accent) !important;
+    background: var(--primary-dark) !important;
 }
 
-/* Se quiser manter os demais links escuros dentro do item selecionado (exceto .action-link) */
-body.route-planning-mode:not(.dark-mode) li.is-selected a:not(.action-link),
-body.route-planning-mode:not(.dark-mode) li.is-selected a:not(.action-link):hover {
-    color: #0d2d28 !important;
-}
-
-body.dark-mode.route-planning-mode li.is-selected,
-body.dark-mode.route-planning-mode li.is-selected:hover,
-body.dark-mode.route-planning-mode li.is-selected:focus {
-    background: #21524c !important;
-    box-shadow: 0 0 0 3px var(--accent) !important;
-    color: #d9f6f2 !important; /* texto claro no fundo escuro */
-}
-body.dark-mode.route-planning-mode li.is-selected > strong,
-body.dark-mode.route-planning-mode li.is-selected .desc,
-body.dark-mode.route-planning-mode li.is-selected a {
-    color: #d9f6f2 !important;
-}
-/* Links dentro do item selecionado em dark mode ficam em destaque ao hover */
-body.dark-mode.route-planning-mode li.is-selected a:hover {
-    color: var(--accent) !important;
-}
-
-/* Mantém a borda/realce mesmo em hover (sem “piscar” o fundo) */
+/* Mantém borda no hover */
 body.route-planning-mode li.is-selected:hover::after {
     content: "";
     position: absolute;
     inset: 0;
-    border: 3px solid var(--accent);
-    border-radius: 10px;
+    border: 3px solid var(--primary);
+    border-radius: 12px;
     pointer-events: none;
 }
 
-/* Correção: não escurecer os botões .action-link dentro do item selecionado (modo claro) */
-body:not(.dark-mode) .route-planning-mode li.is-selected a:not(.action-link),
-body:not(.dark-mode) .route-planning-mode li.is-selected a:not(.action-link):hover {
-    color: #0d2d28 !important;
+/* FAB de rota */
+.route-fab {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 12px 28px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    background-color: var(--laranja);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(242, 124, 42, 0.35);
+    transition: all 0.3s ease;
+}
+.route-planning-mode .route-fab { display: block; }
+.route-fab:hover { background: var(--laranja-dark); }
+
+/* --- Rodapé --- */
+footer {
+    background: var(--primary-dark);
+    color: #e0effa;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+footer a {
+    color: #b3d9f5;
+    text-decoration: none;
+    font-weight: 500;
+}
+footer a:hover { text-decoration: underline; color: var(--rosa); }
+
+footer section {
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    padding: 16px 0;
+}
+footer h2 { color: #e0effa; font-size: 1.4rem; }
+
+/* --- Acessibilidade --- */
+:where(a, button, .visited-btn, .favorite-btn, .dismiss-btn, .map-icon-toggle, .route-fab, input, select, textarea):focus-visible {
+    outline: 3px solid var(--rosa);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* --- Dark Mode --- */
+body.dark-mode {
+    --background:    #0d1e2e;
+    --white:         #112234;
+    --primary:       #29aef5;
+    --primary-dark:  #0096E1;
+    --primary-light: #0d2e44;
+    --text:          #d0eaff;
+    --text-muted:    #7aaac8;
+    --areia:         #0f2030;
+    --areia-dark:    #1a3348;
+    color: #d0eaff;
 }
 
-body:not(.dark-mode) .route-planning-mode li.is-selected .action-link {
-    color: var(--white) !important;
-    background: var(--primary) !important;
+body.dark-mode header { background: #0a1828; }
+
+body.dark-mode nav a {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.7);
 }
-body:not(.dark-mode) .route-planning-mode li.is-selected .action-link:hover {
-    color: var(--primary-dark) !important;
-    background: var(--accent) !important;
+body.dark-mode nav a:hover {
+    background: var(--rosa);
+    color: #0a1828;
+}
+body.dark-mode nav a.active {
+    background: var(--primary);
+    color: #0a1828;
+}
+
+body.dark-mode section,
+body.dark-mode .hero,
+body.dark-mode .map-modal-content { background: var(--white); }
+
+body.dark-mode h2 { color: #a0d8f8; }
+body.dark-mode h3 { color: var(--primary); border-left-color: var(--primary); }
+
+body.dark-mode li {
+    background: #0d2e44;
+    color: #d0eaff;
+    border-left-color: var(--primary);
+}
+body.dark-mode li:hover { background: #123654; }
+body.dark-mode li > strong { color: #a0d8f8; }
+body.dark-mode li.is-favorited { background: #2a1a28; border-left-color: var(--rosa); }
+body.dark-mode li.is-favorited:hover { background: #361e30; }
+
+body.dark-mode .action-link { background: #0d3a5c; color: #a0d8f8; }
+body.dark-mode .action-link:hover { background: var(--primary); color: #0a1828; }
+
+body.dark-mode a { color: var(--primary); }
+body.dark-mode a:hover { color: #7dd4f8; }
+
+body.dark-mode #toggle-favorites-btn,
+body.dark-mode #toggle-route-mode-btn {
+    background: #0d3a5c;
+    color: #a0d8f8;
+}
+body.dark-mode #toggle-favorites-btn:hover,
+body.dark-mode #toggle-route-mode-btn:hover {
+    background: var(--rosa);
+    color: #0a1828;
+}
+
+body.dark-mode .map-close-btn { background: var(--primary-dark); }
+body.dark-mode #map-modal-title { color: #a0d8f8; }
+body.dark-mode .map-button { background: var(--primary); color: #0a1828; }
+body.dark-mode .map-button:hover { background: #29aef5; }
+
+body.dark-mode #back-to-top,
+body.dark-mode .map-icon-toggle { box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+
+body.dark-mode footer { background: #070f1a; color: #8abadc; }
+body.dark-mode footer a { color: #5aaad8; }
+body.dark-mode footer h2 { color: #8abadc; }
+
+/* Selecionado — dark mode */
+body.dark-mode.route-planning-mode li.is-selected,
+body.dark-mode.route-planning-mode li.is-selected:hover,
+body.dark-mode.route-planning-mode li.is-selected:focus {
+    background: #0d2e44 !important;
+    box-shadow: 0 0 0 3px var(--primary) !important;
+    color: #d0eaff !important;
+}
+body.dark-mode.route-planning-mode li.is-selected > strong,
+body.dark-mode.route-planning-mode li.is-selected .desc,
+body.dark-mode.route-planning-mode li.is-selected a { color: #d0eaff !important; }
+body.dark-mode.route-planning-mode li.is-selected a:hover { color: var(--primary) !important; }
+body.dark-mode .route-planning-mode li.is-selected { box-shadow: 0 0 0 3px var(--primary); }
+
+/* --- Responsividade --- */
+@media (max-width: 700px) {
+    header { padding: 12px 14px; }
+    section { padding: 18px 5vw; margin: 20px 2vw 0 2vw; }
+    h2 { font-size: 1.4rem; }
+    nav a { padding: 6px 11px; font-size: 0.85rem; }
+    .hero-content { padding: 24px 20px; }
+    .hero-content h2 { font-size: 1.4rem; }
+    li { padding: 12px 78px 12px 44px; }
 }
