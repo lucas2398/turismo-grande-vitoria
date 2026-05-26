@@ -1,0 +1,736 @@
+/* ============================================================
+   TURISMO NA GRANDE VITÓRIA — style.css
+   Paleta inspirada na bandeira oficial do Espírito Santo
+   Azul #0096E1 · Rosa #F09BBE · Laranja #F27C2A
+   Verde #2E7D4F · Areia #FAF6EE
+   ============================================================ */
+
+/* --- Variáveis Globais --- */
+:root {
+    /* Cores principais */
+    --primary:       #0096E1;   /* Azul oficial da bandeira */
+    --primary-dark:  #006bab;   /* Azul escuro para textos e fundos */
+    --primary-light: #e0f4fd;   /* Azul bem claro para fundos de card */
+
+    --rosa:          #F09BBE;   /* Rosa oficial da bandeira */
+    --rosa-dark:     #c4608a;   /* Rosa escuro para texto sobre fundo claro */
+    --rosa-light:    #fde8f2;   /* Rosa claro para fundos */
+
+    --laranja:       #F27C2A;   /* Laranja vivo — terceira cor */
+    --laranja-dark:  #b85510;   /* Laranja escuro para texto */
+    --laranja-light: #fdecd8;   /* Laranja claro para fundos */
+
+    --verde:         #2E7D4F;   /* Verde serra — visitado, natureza */
+    --verde-light:   #eaf4ee;   /* Verde claro para fundos */
+
+    --areia:         #FAF6EE;   /* Fundo suave, hero, sections */
+    --areia-dark:    #ede6d4;   /* Areia mais escura para bordas */
+
+    /* Neutros */
+    --background:    #F2F6FA;
+    --white:         #ffffff;
+    --text:          #1a2a3a;
+    --text-muted:    #5a6a7a;
+    --shadow:        0 2px 10px rgba(0, 100, 180, 0.10);
+    --shadow-md:     0 4px 16px rgba(0, 100, 180, 0.14);
+}
+
+/* --- Base --- */
+html { background-color: var(--background); }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+main { flex: 1; }
+
+/* --- Header e Navegação --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    background: var(--primary-dark);
+    padding: 14px 20px;
+    box-shadow: 0 2px 12px rgba(0, 80, 160, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 10px;
+}
+
+nav a {
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.10);
+    padding: 7px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    background: var(--rosa);
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+nav a.active {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 150, 225, 0.35);
+}
+
+/* --- Tema Toggle --- */
+#theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: rgba(255, 255, 255, 0.13);
+    color: var(--white);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background .2s;
+}
+#theme-toggle:hover { background: var(--rosa); color: var(--primary-dark); }
+
+/* --- Hero (Página Inicial) --- */
+.hero {
+    max-width: 950px;
+    margin: 36px auto;
+    background: var(--white);
+    padding: 0;
+    border-radius: 18px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    border-top: 4px solid var(--primary);
+}
+
+.hero-img {
+    flex: 1 1 320px;
+    min-width: 260px;
+    background: url('https://blog.aguiabranca.com.br/wp-content/uploads/2024/02/vila-velha_convento_2_tadeu-bianconi-scaled-1-1024x725.jpg') center center/cover no-repeat;
+    min-height: 260px;
+    position: relative;
+}
+
+/* Faixa de cor sobre a imagem remetendo à bandeira */
+.hero-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary) 33%, #fff 33%, #fff 66%, var(--rosa) 66%);
+}
+
+.hero-content {
+    flex: 1 1 50%;
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--areia);
+}
+
+.hero-content h2 {
+    text-align: left;
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.hero-content p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.hero-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 24px;
+}
+
+.hero-btns a {
+    background: var(--primary);
+    color: var(--white);
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: background 0.2s, transform 0.15s;
+}
+
+.hero-btns a:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.hero-btns a:nth-child(2) {
+    background: var(--rosa);
+    color: var(--primary-dark);
+}
+
+.hero-btns a:nth-child(2):hover {
+    background: var(--rosa-dark);
+    color: var(--white);
+}
+
+/* --- Sections --- */
+section {
+    max-width: 900px;
+    margin: 36px auto;
+    background: var(--white);
+    padding: 32px 28px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0;
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+    letter-spacing: 0.5px;
+}
+
+h3 {
+    margin-top: 32px;
+    color: var(--primary);
+    font-size: 1.1rem;
+    border-left: 4px solid var(--primary);
+    padding-left: 10px;
+}
+
+ul { list-style: none; padding: 0; }
+
+/* --- Itens de Lista (li) --- */
+li {
+    font-weight: 500;
+    margin: 14px 0;
+    background: var(--primary-light);
+    border-radius: 12px;
+    padding: 12px 90px 12px 50px;
+    box-shadow: 0 1px 4px rgba(0, 100, 180, 0.06);
+    position: relative;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background .2s, box-shadow .2s;
+    border-left: 3px solid var(--primary);
+}
+
+li:hover {
+    background: #cce8f8;
+    box-shadow: var(--shadow);
+}
+
+/* Estrutura interna do li */
+li > strong { flex-grow: 1; color: var(--primary-dark); }
+
+li > a,
+li > .desc,
+.link-actions {
+    flex-basis: 100%;
+    margin-top: 6px;
+}
+
+.desc {
+    display: block;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.95em;
+    margin-top: 2px;
+}
+
+/* Botão visitado (esquerda) */
+.visited-btn {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.35;
+    filter: grayscale(1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Botões favorito/ignorar (direita) */
+.item-actions {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    gap: 6px;
+}
+
+.favorite-btn,
+.dismiss-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.35;
+    filter: grayscale(1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Estados ativos */
+li.is-visited { opacity: 0.7; }
+li.is-visited > strong { text-decoration: line-through; color: var(--text-muted); }
+li.is-dismissed { opacity: 0.45; filter: grayscale(1); }
+
+li.is-visited .visited-btn,
+li.is-favorited .favorite-btn,
+li.is-dismissed .dismiss-btn {
+    opacity: 1;
+    filter: grayscale(0);
+}
+
+/* li favoritado com sotaque rosa */
+li.is-favorited {
+    border-left-color: var(--rosa);
+    background: var(--rosa-light);
+}
+li.is-favorited:hover { background: #f8d5e6; }
+
+/* --- Links de ação (action-link) --- */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+.action-link {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 6px;
+    transition: background 0.2s;
+}
+.action-link:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* --- Botões de controle (Favoritos / Rota) --- */
+.main-actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+#toggle-favorites-btn,
+#toggle-route-mode-btn {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#toggle-favorites-btn:hover,
+#toggle-route-mode-btn:hover {
+    background: var(--rosa);
+    color: var(--primary-dark);
+}
+
+/* Seção de favoritos */
+#favorites-section {
+    display: none;
+    border-top: 1px solid var(--areia-dark);
+    margin-top: 32px;
+    padding-top: 24px;
+}
+#favorites-section.is-visible { display: block; }
+#favorites-list .empty-message {
+    text-align: center;
+    color: var(--text-muted);
+    background: none;
+    box-shadow: none;
+    padding: 20px;
+}
+#favorites-list li { display: flex; align-items: center; gap: 15px; }
+#favorites-list input[type="checkbox"] { min-width: 18px; min-height: 18px; }
+
+/* --- Modal de Mapa --- */
+.map-icon-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 998;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s, background 0.2s;
+}
+.map-icon-toggle:hover {
+    transform: scale(1.1);
+    background: var(--primary-dark);
+}
+
+.map-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 30, 60, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1002;
+}
+.map-modal-overlay.is-visible { opacity: 1; pointer-events: auto; }
+
+.map-modal-content {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    transform: scale(0.92);
+    transition: transform 0.3s ease;
+    border-top: 4px solid var(--primary);
+}
+.map-modal-overlay.is-visible .map-modal-content { transform: scale(1); }
+
+.map-close-btn {
+    position: absolute;
+    top: -12px; right: -12px;
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    font-size: 1.4rem;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+#map-modal-title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.map-responsive {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.map-responsive iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+}
+
+.map-button {
+    display: block;
+    margin: 14px auto 0;
+    width: fit-content;
+    background: var(--primary);
+    color: var(--white);
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.map-button:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* --- Botão Voltar ao Topo --- */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.3s, transform 0.2s;
+}
+#back-to-top:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* --- Modo Planejamento de Rota --- */
+.route-planning-mode #create-route-btn { display: none; }
+
+.route-planning-mode li[data-id] {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.route-planning-mode li[data-id]:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+.route-planning-mode .item-actions,
+.route-planning-mode .visited-btn {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Selecionado — modo claro */
+body.route-planning-mode:not(.dark-mode) li.is-selected,
+body.route-planning-mode:not(.dark-mode) li.is-selected:hover,
+body.route-planning-mode:not(.dark-mode) li.is-selected:focus {
+    background: var(--primary-light) !important;
+    box-shadow: 0 0 0 3px var(--primary) !important;
+    color: var(--primary-dark) !important;
+}
+body.route-planning-mode:not(.dark-mode) li.is-selected > strong,
+body.route-planning-mode:not(.dark-mode) li.is-selected .desc,
+body.route-planning-mode:not(.dark-mode) li.is-selected a { color: var(--primary-dark) !important; }
+body.route-planning-mode:not(.dark-mode) li.is-selected .action-link {
+    color: var(--white) !important;
+    background: var(--primary) !important;
+}
+body.route-planning-mode:not(.dark-mode) li.is-selected .action-link:hover {
+    background: var(--primary-dark) !important;
+}
+
+/* Mantém borda no hover */
+body.route-planning-mode li.is-selected:hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--primary);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* FAB de rota */
+.route-fab {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 12px 28px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    background-color: var(--laranja);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(242, 124, 42, 0.35);
+    transition: all 0.3s ease;
+}
+.route-planning-mode .route-fab { display: block; }
+.route-fab:hover { background: var(--laranja-dark); }
+
+/* --- Rodapé --- */
+footer {
+    background: var(--primary-dark);
+    color: #e0effa;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+footer a {
+    color: #b3d9f5;
+    text-decoration: none;
+    font-weight: 500;
+}
+footer a:hover { text-decoration: underline; color: var(--rosa); }
+
+footer section {
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    padding: 16px 0;
+}
+footer h2 { color: #e0effa; font-size: 1.4rem; }
+
+/* --- Acessibilidade --- */
+:where(a, button, .visited-btn, .favorite-btn, .dismiss-btn, .map-icon-toggle, .route-fab, input, select, textarea):focus-visible {
+    outline: 3px solid var(--rosa);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* --- Dark Mode --- */
+body.dark-mode {
+    --background:    #0d1e2e;
+    --white:         #112234;
+    --primary:       #29aef5;
+    --primary-dark:  #0096E1;
+    --primary-light: #0d2e44;
+    --text:          #d0eaff;
+    --text-muted:    #7aaac8;
+    --areia:         #0f2030;
+    --areia-dark:    #1a3348;
+    color: #d0eaff;
+}
+
+body.dark-mode header { background: #0a1828; }
+
+body.dark-mode nav a {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.7);
+}
+body.dark-mode nav a:hover {
+    background: var(--rosa);
+    color: #0a1828;
+}
+body.dark-mode nav a.active {
+    background: var(--primary);
+    color: #0a1828;
+}
+
+body.dark-mode section,
+body.dark-mode .hero,
+body.dark-mode .map-modal-content { background: var(--white); }
+
+body.dark-mode h2 { color: #a0d8f8; }
+body.dark-mode h3 { color: var(--primary); border-left-color: var(--primary); }
+
+body.dark-mode li {
+    background: #0d2e44;
+    color: #d0eaff;
+    border-left-color: var(--primary);
+}
+body.dark-mode li:hover { background: #123654; }
+body.dark-mode li > strong { color: #a0d8f8; }
+body.dark-mode li.is-favorited { background: #2a1a28; border-left-color: var(--rosa); }
+body.dark-mode li.is-favorited:hover { background: #361e30; }
+
+body.dark-mode .action-link { background: #0d3a5c; color: #a0d8f8; }
+body.dark-mode .action-link:hover { background: var(--primary); color: #0a1828; }
+
+body.dark-mode a { color: var(--primary); }
+body.dark-mode a:hover { color: #7dd4f8; }
+
+body.dark-mode #toggle-favorites-btn,
+body.dark-mode #toggle-route-mode-btn {
+    background: #0d3a5c;
+    color: #a0d8f8;
+}
+body.dark-mode #toggle-favorites-btn:hover,
+body.dark-mode #toggle-route-mode-btn:hover {
+    background: var(--rosa);
+    color: #0a1828;
+}
+
+body.dark-mode .map-close-btn { background: var(--primary-dark); }
+body.dark-mode #map-modal-title { color: #a0d8f8; }
+body.dark-mode .map-button { background: var(--primary); color: #0a1828; }
+body.dark-mode .map-button:hover { background: #29aef5; }
+
+body.dark-mode #back-to-top,
+body.dark-mode .map-icon-toggle { box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+
+body.dark-mode footer { background: #070f1a; color: #8abadc; }
+body.dark-mode footer a { color: #5aaad8; }
+body.dark-mode footer h2 { color: #8abadc; }
+
+/* Selecionado — dark mode */
+body.dark-mode.route-planning-mode li.is-selected,
+body.dark-mode.route-planning-mode li.is-selected:hover,
+body.dark-mode.route-planning-mode li.is-selected:focus {
+    background: #0d2e44 !important;
+    box-shadow: 0 0 0 3px var(--primary) !important;
+    color: #d0eaff !important;
+}
+body.dark-mode.route-planning-mode li.is-selected > strong,
+body.dark-mode.route-planning-mode li.is-selected .desc,
+body.dark-mode.route-planning-mode li.is-selected a { color: #d0eaff !important; }
+body.dark-mode.route-planning-mode li.is-selected a:hover { color: var(--primary) !important; }
+body.dark-mode .route-planning-mode li.is-selected { box-shadow: 0 0 0 3px var(--primary); }
+
+/* --- Responsividade --- */
+@media (max-width: 700px) {
+    header { padding: 12px 14px; }
+    section { padding: 18px 5vw; margin: 20px 2vw 0 2vw; }
+    h2 { font-size: 1.4rem; }
+    nav a { padding: 6px 11px; font-size: 0.85rem; }
+    .hero-content { padding: 24px 20px; }
+    .hero-content h2 { font-size: 1.4rem; }
+    li { padding: 12px 78px 12px 44px; }
+}
