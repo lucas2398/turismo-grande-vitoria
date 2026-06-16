@@ -8,16 +8,13 @@
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/684/684908.png">
     <title>Restaurantes — Turismo na Grande Vitória</title>
     <style>
-        /* === Filtros === */
         .filters-wrap {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-bottom: 24px;
         }
-        .search-input-wrap {
-            position: relative;
-        }
+        .search-input-wrap { position: relative; }
         #search-input {
             width: 100%;
             padding: 10px 16px 10px 40px;
@@ -43,11 +40,7 @@
             pointer-events: none;
             opacity: 0.5;
         }
-        .type-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
+        .type-filters { display: flex; flex-wrap: wrap; gap: 7px; }
         .type-btn {
             background: var(--areia, #FAF6EE);
             color: var(--text-muted, #5a6a7a);
@@ -71,32 +64,21 @@
             border-color: var(--primary, #0096E1);
             font-weight: 700;
         }
-
         #filter-count {
             font-size: 0.85rem;
             color: var(--text-muted, #5a6a7a);
             margin-bottom: 4px;
             min-height: 1.2em;
         }
-
-        li[data-id].hidden-by-filter {
-            display: none !important;
-        }
-
-        h3.city-heading.all-hidden {
-            display: none;
-        }
-        ul.city-list.all-hidden {
-            display: none;
-        }
-
+        li[data-id].hidden-by-filter { display: none !important; }
+        h3.city-heading.all-hidden { display: none; }
+        ul.city-list.all-hidden { display: none; }
         mark.search-highlight {
             background: rgba(242, 124, 42, 0.22);
             color: inherit;
             border-radius: 3px;
             padding: 0 1px;
         }
-
         #no-results {
             display: none;
             text-align: center;
@@ -104,27 +86,10 @@
             color: var(--text-muted, #5a6a7a);
             font-size: 0.95rem;
         }
-
-        body.dark-mode #search-input {
-            background: #0d2030;
-            color: #d0eaff;
-            border-color: #1a3a5a;
-        }
-        body.dark-mode .type-btn {
-            background: #0d2030;
-            color: #7aaac8;
-            border-color: #1a3a5a;
-        }
-        body.dark-mode .type-btn:hover {
-            background: #0d2e44;
-            border-color: var(--primary, #29aef5);
-            color: #a0d8f8;
-        }
-        body.dark-mode .type-btn.active {
-            background: var(--primary, #29aef5);
-            color: #0a1828;
-            border-color: var(--primary, #29aef5);
-        }
+        body.dark-mode #search-input { background: #0d2030; color: #d0eaff; border-color: #1a3a5a; }
+        body.dark-mode .type-btn { background: #0d2030; color: #7aaac8; border-color: #1a3a5a; }
+        body.dark-mode .type-btn:hover { background: #0d2e44; border-color: var(--primary, #29aef5); color: #a0d8f8; }
+        body.dark-mode .type-btn.active { background: var(--primary, #29aef5); color: #0a1828; border-color: var(--primary, #29aef5); }
     </style>
 </head>
 <body data-page-id="restaurantes">
@@ -153,7 +118,6 @@
                 <ul id="favorites-list"></ul>
             </section>
 
-            <!-- === FILTROS === -->
             <div class="filters-wrap">
                 <div class="search-input-wrap">
                     <span class="search-icon">🔍</span>
@@ -190,6 +154,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/9u9PDhmT35qaN3JGA"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.2958356868758!2d-40.25311502499224!3d-20.193444881255033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81f63b4d3e49f%3A0x5f2d64b98d19ce8f!2sMahai%20-%20Serra!5e1!3m2!1sen!2sbr!4v1781643901874!5m2!1sen!2sbr"
                             data-location-name="Mahai - Serra"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -208,6 +173,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/dzH2kt6JW8x4BHqh7"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.764872354175!2d-40.214937824994145!3d-20.129050881304554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb7f7a0aaabd0a3%3A0x474546822f00d41a!2sRestaurante%20Lagoa%20Juara!5e1!3m2!1sen!2sbr!4v1781643925375!5m2!1sen!2sbr"
                             data-location-name="Restaurante Lagoa Juara"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -225,7 +191,8 @@
                         <button type="button" class="dismiss-btn" aria-label="Não tenho interesse">🚫</button>
                     </div>
                     <div class="link-actions">
-                        <a href="https://maps.app.goo.gl/9rETdTdtrNFQsE7HA"
+                        <a href="https://maps.app.goo.gl/KuDTHnALbYsLbYgg8"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.3184251400367!2d-40.19418072499222!3d-20.19245618125583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81d004bf3a7e1%3A0xb49bcde467454cc!2sPetisco%20das%20Meninas!5e1!3m2!1sen!2sbr!4v1781643944215!5m2!1sen!2sbr"
                             data-location-name="Petisco das Meninas Manguinhos"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -244,6 +211,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/Ev2L6FtybhaLygFJ8"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56949.0965632977!2d-40.23280564336236!3d-20.192451363747075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81d004bf3a7e1%3A0xb49bcde467454cc!2sPetisco%20das%20Meninas!5e1!3m2!1sen!2sbr!4v1781643973211!5m2!1sen!2sbr"
                             data-location-name="Petisco das Meninas Colina"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -262,6 +230,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/76QRZrrf56MAmtEj8"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.4857568076036!2d-40.21277202499121!3d-20.228869981227756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81b002ec158fb%3A0xb557392debc6c0c4!2sBar%20e%20Restaurante%20Lansavi!5e1!3m2!1sen!2sbr!4v1781643988406!5m2!1sen!2sbr"
                             data-location-name="Lansavi"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -280,6 +249,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/ZLYqrmrVu4rTkySX8"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56925.46185308148!2d-40.301474292731804!3d-20.257007088534973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81bf12c9c9441%3A0x4949031bd67927e0!2sSilva%27s%20Restaurante!5e1!3m2!1sen!2sbr!4v1781644014667!5m2!1sen!2sbr"
                             data-location-name="Silvas"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -298,6 +268,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/hgjKt5ApZU3nyZhv7"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.5216873892855!2d-40.21084282499132!3d-20.2272999812289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81d9ae716e011%3A0x96bb961439220276!2sPrai%C3%B4%20Gastrobar!5e1!3m2!1sen!2sbr!4v1781644028744!5m2!1sen!2sbr"
                             data-location-name="Praiô Gastrobar"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -322,6 +293,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/pFCrJLEk3MzxQfrY6"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.762830260208!2d-40.29858132498933!3d-20.304017381170052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb8177b48b8d2a1%3A0xde2df4c601589ad0!2sTero%20Brasa%20e%20Vinho!5e1!3m2!1sen!2sbr!4v1781644043379!5m2!1sen!2sbr"
                             data-location-name="Tero Brasa e Vinho"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -340,6 +312,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/vjGRoHPjh47nDLJJ6"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.479136436548!2d-40.29647262499012!3d-20.27280728119407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81810a6150c5b%3A0xa032f9c8b44db1a5!2sLa%20Dolina%20-%20Restaurante%20Argentino%20Vit%C3%B3ria!5e1!3m2!1sen!2sbr!4v1781644073511!5m2!1sen!2sbr"
                             data-location-name="La Dolina - Restaurante Argentino Vitória"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -358,6 +331,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/M7S2KbJmAL3hmZDu8"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.9116287373345!2d-40.29653982498946!3d-20.297537881175057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81767a8ef05a5%3A0x1ce07ce16f4400d6!2sO%20Quintal%20Parrilla%20Bar!5e1!3m2!1sen!2sbr!4v1781644091834!5m2!1sen!2sbr"
                             data-location-name="O Quintal Parrilla Bar"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -376,6 +350,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/ofYtCwFiEyCA5aPV9"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56910.58783725343!2d-40.3351647425987!3d-20.297533042924638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817f02d7360d7%3A0x7cbd8e6940e6a6e5!2sAlas!5e1!3m2!1sen!2sbr!4v1781644110591!5m2!1sen!2sbr"
                             data-location-name="Alas"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -394,6 +369,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/9rETdTdtrNFQsE7HA"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.6387297746455!2d-40.290550424989206!3d-20.309419881165947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817cfff0dd381%3A0x1a514a2bc758c620!2sRestaurante%20El%20Gitano!5e1!3m2!1sen!2sbr!4v1781644126594!5m2!1sen!2sbr"
                             data-location-name="Restaurante El Gitano"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -412,6 +388,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/h9KtD9sXbGDZZwSeA"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.384933462068!2d-40.328224524988805!3d-20.320464181157497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83d215a8da9d3%3A0x312bdb4138c79d9e!2sBistr%C3%B4%20Saldanha!5e1!3m2!1sen!2sbr!4v1781644141341!5m2!1sen!2sbr"
                             data-location-name="Bistrô Saldanha"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -430,6 +407,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/advBwBxP9KjDiN6EA"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.9312829475502!2d-40.29533282498941!3d-20.296681881175758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817ec3a86e47d%3A0xb002bb5767b169ff!2sMeatpack!5e1!3m2!1sen!2sbr!4v1781644154210!5m2!1sen!2sbr"
                             data-location-name="Meatpack"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -448,6 +426,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/YEZ66uJsGoF6mLDe7"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14227.622405381548!2d-40.29221205514159!3d-20.29780038530457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb83d317601ed31%3A0x39c86406bc14e24d!2sRestaurante%20Caieiras!5e1!3m2!1sen!2sbr!4v1781644177450!5m2!1sen!2sbr"
                             data-location-name="Restaurante Caieiras"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -466,6 +445,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/uC8y2P5RDLAihBMB6"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14229.51775086165!2d-40.3561351128418!3d-20.277153999999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817013094bb93%3A0x4612ddd279128672!2sPoke%20Beach%20-%20Vit%C3%B3ria!5e1!3m2!1sen!2sbr!4v1781644192375!5m2!1sen!2sbr"
                             data-location-name="Poke Beach - Vitória"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -484,6 +464,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/PVyVTEyEteAytFKS8"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14227.340165531325!2d-40.309423752166495!3d-20.30087316110208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817eee6dbbe91%3A0x11f1c8a8da895c9b!2sRestaurante%20Banzai!5e1!3m2!1sen!2sbr!4v1781644208163!5m2!1sen!2sbr"
                             data-location-name="Restaurante Banzai"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -502,6 +483,7 @@
                     </div>
                     <div class="link-actions">
                         <a href="https://maps.app.goo.gl/dGgnDoNMAqm518S38"
+                            data-embed-url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.846737716734!2d-40.27217882499044!3d-20.256772681206343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb819a0f2fd8847%3A0xc04cd53a74dfca27!2sComarella%20Pizza%20%26%20Burger%20Vit%C3%B3ria!5e1!3m2!1sen!2sbr!4v1781644223459!5m2!1sen!2sbr"
                             data-location-name="Comarella Pizza & Burger Vitória"
                             target="_blank" rel="noopener noreferrer"
                             class="location-link action-link">Localização</a>
@@ -509,7 +491,6 @@
                 </li>
 
             </ul>
-
         </section>
     </main>
 
@@ -536,7 +517,6 @@
 
     <script src="script.js"></script>
     <script>
-    // === FILTROS E BUSCA ===
     (function() {
         const searchInput  = document.getElementById('search-input');
         const typeButtons  = document.querySelectorAll('.type-btn');
@@ -550,9 +530,7 @@
         let searchTerm = '';
 
         function normalize(str) {
-            return str.toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '');
+            return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         }
 
         function highlight(text, term) {
@@ -578,14 +556,12 @@
                 if (typeMatch && textMatch) {
                     item.classList.remove('hidden-by-filter');
                     visible++;
-
                     const strongEl = item.querySelector('strong');
                     const descEl   = item.querySelector('.desc');
                     if (strongEl) strongEl.innerHTML = highlight(strongEl.textContent, searchTerm.trim());
                     if (descEl)   descEl.innerHTML   = highlight(descEl.textContent, searchTerm.trim());
                 } else {
                     item.classList.add('hidden-by-filter');
-
                     const strongEl = item.querySelector('strong');
                     const descEl   = item.querySelector('.desc');
                     if (strongEl) strongEl.textContent = strongEl.textContent;
@@ -593,7 +569,6 @@
                 }
             });
 
-            // Esconde headings de cidades sem itens visíveis
             cityLists.forEach((ul, i) => {
                 const hasVisible = ul.querySelectorAll('li[data-id]:not(.hidden-by-filter)').length > 0;
                 ul.classList.toggle('all-hidden', !hasVisible);
