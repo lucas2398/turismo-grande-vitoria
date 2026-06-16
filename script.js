@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             DEFAULT_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1ik6C1K6StANmTeuBqgxgQaBfX-MMM8E&ehbc=2E312F&noprof=1";
             DEFAULT_TITLE = "Pontos Turísticos";
         } else if (pageId === 'restaurantes') {
-            DEFAULT_EMBED_URL = "link do mapa de restaurantes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+            DEFAULT_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1ik6C1K6StANmTeuBqgxgQaBfX-MMM8E&ehbc=2E312F&noprof=1";
             DEFAULT_TITLE = "Restaurantes";
         }
 
